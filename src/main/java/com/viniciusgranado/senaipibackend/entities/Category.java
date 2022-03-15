@@ -19,6 +19,7 @@ public class Category implements Serializable {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
   private String name;
+  private String reference;
 
   @JsonIgnore
   @ManyToMany(mappedBy = "categories")
@@ -27,9 +28,10 @@ public class Category implements Serializable {
   public Category() {
   }
 
-  public Category(Long id, String name) {
+  public Category(Long id, String name, String reference) {
     this.id = id;
     this.name = name;
+    this.reference = reference;
   }
 
   public Long getId() {
@@ -46,6 +48,14 @@ public class Category implements Serializable {
 
   public void setName(String name) {
     this.name = name;
+  }
+
+  public String getReference() {
+    return reference;
+  }
+
+  public void setReference(String reference) {
+    this.reference = reference;
   }
 
   public Set<Product> getProducts() {
