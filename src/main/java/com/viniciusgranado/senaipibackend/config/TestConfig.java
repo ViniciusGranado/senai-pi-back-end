@@ -26,7 +26,7 @@ public class TestConfig implements CommandLineRunner {
     Category cat2 = new Category(null, "Laptops", "laptops");
     Category cat3 = new Category(null, "Video Games", "video-games");
     Category cat4 = new Category(null, "Sound", "sound");
-    Category cat5 = new Category(null, "Wearables", "Wearables");
+    Category cat5 = new Category(null, "Wearables", "wearables");
 
     Product p1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
     Product p2 = new Product(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
