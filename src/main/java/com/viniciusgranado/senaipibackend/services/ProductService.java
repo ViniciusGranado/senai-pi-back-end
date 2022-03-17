@@ -2,6 +2,7 @@ package com.viniciusgranado.senaipibackend.services;
 
 import com.viniciusgranado.senaipibackend.entities.Category;
 import com.viniciusgranado.senaipibackend.entities.Product;
+import com.viniciusgranado.senaipibackend.repositories.CategoryRepository;
 import com.viniciusgranado.senaipibackend.repositories.ProductRepository;
 import com.viniciusgranado.senaipibackend.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,16 @@ import java.util.Set;
 @Service
 public class ProductService {
   @Autowired
-  private ProductRepository repository;
+  private ProductRepository productRepository;
+  private CategoryRepository categoryRepository;
 
   public List<Product> findAll() {
-    return repository.findAll();
+    return productRepository.findAll();
   }
 
   public Product findById(Long id) {
     try {
-      Optional<Product> obj = repository.findById(id);
+      Optional<Product> obj = productRepository.findById(id);
 
       return obj.get();
     } catch (NoSuchElementException e) {
@@ -32,6 +34,6 @@ public class ProductService {
   }
 
   public List<Product> findAllByCategoriesIn(Set<Category> categories) {
-    return repository.findAllByCategoriesIn(categories);
+    return productRepository.findAllByCategoriesIn(categories);
   }
 }
