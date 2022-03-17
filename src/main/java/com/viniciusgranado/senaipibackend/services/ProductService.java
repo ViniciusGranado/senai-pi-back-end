@@ -1,5 +1,6 @@
 package com.viniciusgranado.senaipibackend.services;
 
+import com.viniciusgranado.senaipibackend.entities.Category;
 import com.viniciusgranado.senaipibackend.entities.Product;
 import com.viniciusgranado.senaipibackend.repositories.ProductRepository;
 import com.viniciusgranado.senaipibackend.services.exceptions.ResourceNotFoundException;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class ProductService {
@@ -27,5 +29,9 @@ public class ProductService {
     } catch (NoSuchElementException e) {
       throw new ResourceNotFoundException(id);
     }
+  }
+
+  public List<Product> findAllByCategoriesIn(Set<Category> categories) {
+    return repository.findAllByCategoriesIn(categories);
   }
 }

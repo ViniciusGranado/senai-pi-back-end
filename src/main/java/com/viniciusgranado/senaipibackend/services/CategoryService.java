@@ -28,4 +28,14 @@ public class CategoryService {
       throw new ResourceNotFoundException(id);
     }
   }
+
+  public Category findByReference(String reference) {
+    try {
+      Optional<Category> obj = repository.findByReference(reference);
+
+      return obj.get();
+    } catch (NoSuchElementException e) {
+      throw new ResourceNotFoundException(reference);
+    }
+  }
 }
