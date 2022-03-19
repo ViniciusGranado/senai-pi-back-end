@@ -45,4 +45,11 @@ public class ProductResource {
 
     return ResponseEntity.ok().body(list);
   }
+
+  @GetMapping(value = "/favorites")
+  public ResponseEntity<List<Product>> findAllByIsFavorite() {
+    List<Product> list = productService.findAllByIsFavorite();
+
+    return ResponseEntity.ok().body(list);
+  }
 }

@@ -36,4 +36,8 @@ public class ProductService {
   public List<Product> findAllByCategoriesIn(Set<Category> categories) {
     return productRepository.findAllByCategoriesIn(categories);
   }
+
+  public List<Product> findAllByIsFavorite() {
+    return productRepository.findAllByIsFavorite(true);
+  }
 }

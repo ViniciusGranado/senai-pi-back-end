@@ -20,6 +20,7 @@ public class Product implements Serializable {
   private String description;
   private Double price;
   private String imgUrl;
+  private boolean isFavorite;
 
   @ManyToMany
   @JoinTable(
@@ -32,12 +33,13 @@ public class Product implements Serializable {
   public Product() {
   }
 
-  public Product(Long id, String name, String description, Double price, String imgUrl) {
+  public Product(Long id, String name, String description, Double price, String imgUrl, boolean isFavorite) {
     this.id = id;
     this.name = name;
     this.description = description;
     this.price = price;
     this.imgUrl = imgUrl;
+    this.isFavorite = isFavorite;
   }
 
   public Long getId() {
@@ -78,6 +80,14 @@ public class Product implements Serializable {
 
   public void setImgUrl(String imgUrl) {
     this.imgUrl = imgUrl;
+  }
+
+  public boolean isFavorite() {
+    return isFavorite;
+  }
+
+  public void setFavorite(boolean favorite) {
+    isFavorite = favorite;
   }
 
   public Set<Category> getCategories() {
