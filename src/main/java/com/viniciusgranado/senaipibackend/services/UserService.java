@@ -1,7 +1,9 @@
 package com.viniciusgranado.senaipibackend.services;
 
 import com.viniciusgranado.senaipibackend.entities.User;
+import com.viniciusgranado.senaipibackend.entities.enums.Roles;
 import com.viniciusgranado.senaipibackend.repositories.UserRepository;
+import com.viniciusgranado.senaipibackend.services.exceptions.InvalidPasswordException;
 import com.viniciusgranado.senaipibackend.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,12 +36,16 @@ public class UserService {
     return obj.orElseThrow(() -> new ResourceNotFoundException("findByUsername"));
   }
 
-  public Boolean findIfUserPasswordIsCorrect(String username, String password) {
+  public Roles findIfUserPasswordIsCorrect(String username, String password) {
     System.out.println(username);
     System.out.println(password);
 
     User user = findByUsername(username);
 
-    return user.getPassword().equals(password);
+    if (user.getPassword().equals(password)) {
+      return user.getRole();
+    }
+
+    throw new InvalidPasswordException();
   }
 }

@@ -3,6 +3,7 @@ package com.viniciusgranado.senaipibackend.resources;
 import com.viniciusgranado.senaipibackend.entities.Category;
 import com.viniciusgranado.senaipibackend.entities.LoginForm;
 import com.viniciusgranado.senaipibackend.entities.User;
+import com.viniciusgranado.senaipibackend.entities.enums.Roles;
 import com.viniciusgranado.senaipibackend.services.CategoryService;
 import com.viniciusgranado.senaipibackend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,8 +51,8 @@ public class UserResource {
   }
 
   @PostMapping(value = "/login")
-  public ResponseEntity<Boolean> findIfUserPasswordIsCorrect(@RequestBody LoginForm loginForm) {
-    Boolean obj = service.findIfUserPasswordIsCorrect(loginForm.getUsername(), loginForm.getPassword());
+  public ResponseEntity<Roles> findIfUserPasswordIsCorrect(@RequestBody LoginForm loginForm) {
+    Roles obj = service.findIfUserPasswordIsCorrect(loginForm.getUsername(), loginForm.getPassword());
 
     return ResponseEntity.ok().body(obj);
   }

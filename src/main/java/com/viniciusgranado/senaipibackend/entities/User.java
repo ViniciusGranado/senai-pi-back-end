@@ -1,5 +1,7 @@
 package com.viniciusgranado.senaipibackend.entities;
 
+import com.viniciusgranado.senaipibackend.entities.enums.Roles;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -16,16 +18,18 @@ public class User implements Serializable {
   private String email;
   private String username;
   private String password;
+  private Roles role;
 
   public User() {
   }
 
-  public User(Long id, String name, String email, String username, String password) {
+  public User(Long id, String name, String email, String username, String password, Roles role) {
     this.id = id;
     this.name = name;
     this.email = email;
     this.username = username;
     this.password = password;
+    this.role = role;
   }
 
   public Long getId() {
@@ -66,6 +70,14 @@ public class User implements Serializable {
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public Roles getRole() {
+    return role;
+  }
+
+  public void setRole(Roles role) {
+    this.role = role;
   }
 
   @Override
