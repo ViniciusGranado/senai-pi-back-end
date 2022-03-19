@@ -1,6 +1,7 @@
 package com.viniciusgranado.senaipibackend.resources;
 
 import com.viniciusgranado.senaipibackend.entities.Category;
+import com.viniciusgranado.senaipibackend.entities.LoginForm;
 import com.viniciusgranado.senaipibackend.entities.User;
 import com.viniciusgranado.senaipibackend.services.CategoryService;
 import com.viniciusgranado.senaipibackend.services.UserService;
@@ -39,5 +40,19 @@ public class UserResource {
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 
     return ResponseEntity.created(uri).body(obj);
+  }
+
+  @GetMapping(value = "/username/{username}")
+  public ResponseEntity<User> findByUsername(@PathVariable String username) {
+    User obj = service.findByUsername(username);
+
+    return ResponseEntity.ok().body(obj);
+  }
+
+  @PostMapping(value = "/login")
+  public ResponseEntity<Boolean> findIfUserPasswordIsCorrect(@RequestBody LoginForm loginForm) {
+    Boolean obj = service.findIfUserPasswordIsCorrect(loginForm.getUsername(), loginForm.getPassword());
+
+    return ResponseEntity.ok().body(obj);
   }
 }
