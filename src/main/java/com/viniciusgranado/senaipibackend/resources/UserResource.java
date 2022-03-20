@@ -1,10 +1,8 @@
 package com.viniciusgranado.senaipibackend.resources;
 
-import com.viniciusgranado.senaipibackend.entities.Category;
-import com.viniciusgranado.senaipibackend.entities.LoginForm;
 import com.viniciusgranado.senaipibackend.entities.User;
-import com.viniciusgranado.senaipibackend.entities.enums.Roles;
-import com.viniciusgranado.senaipibackend.services.CategoryService;
+import com.viniciusgranado.senaipibackend.entities.dtos.LoginForm;
+import com.viniciusgranado.senaipibackend.entities.dtos.UserInfo;
 import com.viniciusgranado.senaipibackend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -51,8 +49,8 @@ public class UserResource {
   }
 
   @PostMapping(value = "/login")
-  public ResponseEntity<Roles> findIfUserPasswordIsCorrect(@RequestBody LoginForm loginForm) {
-    Roles obj = service.findIfUserPasswordIsCorrect(loginForm.getUsername(), loginForm.getPassword());
+  public ResponseEntity<UserInfo> findIfUserPasswordIsCorrect(@RequestBody LoginForm loginForm) {
+    UserInfo obj = service.findIfUserPasswordIsCorrect(loginForm.getUsername(), loginForm.getPassword());
 
     return ResponseEntity.ok().body(obj);
   }

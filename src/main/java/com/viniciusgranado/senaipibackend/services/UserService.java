@@ -1,6 +1,7 @@
 package com.viniciusgranado.senaipibackend.services;
 
 import com.viniciusgranado.senaipibackend.entities.User;
+import com.viniciusgranado.senaipibackend.entities.dtos.UserInfo;
 import com.viniciusgranado.senaipibackend.entities.enums.Roles;
 import com.viniciusgranado.senaipibackend.repositories.UserRepository;
 import com.viniciusgranado.senaipibackend.services.exceptions.InvalidPasswordException;
@@ -36,14 +37,14 @@ public class UserService {
     return obj.orElseThrow(() -> new ResourceNotFoundException("findByUsername"));
   }
 
-  public Roles findIfUserPasswordIsCorrect(String username, String password) {
+  public UserInfo findIfUserPasswordIsCorrect(String username, String password) {
     System.out.println(username);
     System.out.println(password);
 
     User user = findByUsername(username);
 
     if (user.getPassword().equals(password)) {
-      return user.getRole();
+      return new UserInfo(user.getId(), user.getRole());
     }
 
     throw new InvalidPasswordException();

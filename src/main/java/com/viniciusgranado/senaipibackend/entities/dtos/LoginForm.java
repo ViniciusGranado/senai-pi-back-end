@@ -1,4 +1,4 @@
-package com.viniciusgranado.senaipibackend.entities;
+package com.viniciusgranado.senaipibackend.entities.dtos;
 
 import java.io.Serializable;
 import java.util.Objects;
