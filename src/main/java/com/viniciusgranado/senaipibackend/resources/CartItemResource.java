@@ -41,7 +41,7 @@ public class CartItemResource {
   }
 
   @DeleteMapping
-  public ResponseEntity<Void> delete(@RequestBody CartItemData deletedItem) {
+  public ResponseEntity<CartItem> delete(@RequestBody CartItemData deletedItem) {
     Cart cart = cartService.findByClientId(deletedItem.getClientId());
     Product product = productService.findById(deletedItem.getProductId());
 
@@ -49,6 +49,7 @@ public class CartItemResource {
 
     cartItemService.delete(obj);
 
-    return ResponseEntity.noContent().build();
+//    return ResponseEntity.noContent().build();
+    return ResponseEntity.ok().body(obj);
   }
 }
