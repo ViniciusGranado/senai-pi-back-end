@@ -14,15 +14,13 @@ import java.util.Objects;
 public class CartItem implements Serializable {
   @EmbeddedId
   private CartItemPk id = new CartItemPk();
-  private Double price;
 
   public CartItem() {
   }
 
-  public CartItem(Cart cart, Product product, Double price) {
+  public CartItem(Cart cart, Product product) {
     id.setCart(cart);
     id.setProduct(product);
-    this.price = price;
   }
 
   @JsonIgnore
@@ -40,14 +38,6 @@ public class CartItem implements Serializable {
 
   public void setProduct(Product product) {
     id.setProduct(product);
-  }
-
-  public Double getPrice() {
-    return price;
-  }
-
-  public void setPrice(Double price) {
-    this.price = price;
   }
 
   @Override
