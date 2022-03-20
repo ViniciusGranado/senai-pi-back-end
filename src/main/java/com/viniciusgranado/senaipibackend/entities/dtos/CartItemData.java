@@ -5,14 +5,14 @@ import java.util.Objects;
 
 public class CartItemData implements Serializable {
   private Long productId;
-  private Long cartId;
+  private Long clientId;
 
   public CartItemData() {
   }
 
   public CartItemData(Long clientId, Long cartId) {
     this.productId = clientId;
-    this.cartId = cartId;
+    this.clientId = cartId;
   }
 
   public Long getProductId() {
@@ -23,12 +23,12 @@ public class CartItemData implements Serializable {
     this.productId = productId;
   }
 
-  public Long getCartId() {
-    return cartId;
+  public Long getClientId() {
+    return clientId;
   }
 
-  public void setCartId(Long cartId) {
-    this.cartId = cartId;
+  public void setClientId(Long clientId) {
+    this.clientId = clientId;
   }
 
   @Override
@@ -36,11 +36,11 @@ public class CartItemData implements Serializable {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     CartItemData that = (CartItemData) o;
-    return Objects.equals(productId, that.productId) && Objects.equals(cartId, that.cartId);
+    return Objects.equals(productId, that.productId) && Objects.equals(clientId, that.clientId);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(productId, cartId);
+    return Objects.hash(productId, clientId);
   }
 }

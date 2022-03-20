@@ -31,7 +31,7 @@ public class CartItemResource {
 
   @PostMapping
   public ResponseEntity<CartItem> insert(@RequestBody CartItemData newCartItem) {
-    Cart cart = cartService.findByClientId(newCartItem.getCartId());
+    Cart cart = cartService.findByClientId(newCartItem.getClientId());
     Product product = productService.findById(newCartItem.getProductId());
 
     CartItem obj = new CartItem(cart, product);
