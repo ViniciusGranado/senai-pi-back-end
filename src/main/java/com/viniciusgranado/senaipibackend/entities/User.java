@@ -20,6 +20,9 @@ public class User implements Serializable {
   private String password;
   private Roles role;
 
+  @OneToOne(mappedBy = "client")
+  private Cart cart;
+
   public User() {
   }
 

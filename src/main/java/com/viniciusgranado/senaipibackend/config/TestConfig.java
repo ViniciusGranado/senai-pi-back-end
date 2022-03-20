@@ -1,13 +1,8 @@
 package com.viniciusgranado.senaipibackend.config;
 
-import com.viniciusgranado.senaipibackend.entities.Category;
-import com.viniciusgranado.senaipibackend.entities.Product;
-import com.viniciusgranado.senaipibackend.entities.User;
+import com.viniciusgranado.senaipibackend.entities.*;
 import com.viniciusgranado.senaipibackend.entities.enums.Roles;
-import com.viniciusgranado.senaipibackend.repositories.CategoryRepository;
-import com.viniciusgranado.senaipibackend.repositories.ProductRepository;
-import com.viniciusgranado.senaipibackend.repositories.UserRepository;
-import com.viniciusgranado.senaipibackend.resources.UserResource;
+import com.viniciusgranado.senaipibackend.repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
@@ -26,6 +21,12 @@ public class TestConfig implements CommandLineRunner {
 
   @Autowired
   private UserRepository userRepository;
+
+  @Autowired
+  private CartRepository cartRepository;
+
+  @Autowired
+  private CartItemRepository cartItemRepository;
 
   @Override
   public void run(String... args) throws Exception {
@@ -57,5 +58,22 @@ public class TestConfig implements CommandLineRunner {
     User u2 = new User(null, "Alex Green", "alex@gmail.com", "agreen", "123456",  Roles.valueOf("ADMIN"));
 
     userRepository.saveAll(Arrays.asList(u1, u2));
+
+    Cart c1 = new Cart(null, u1);
+    Cart c2 = new Cart(null, u2);
+
+    cartRepository.saveAll(Arrays.asList(c1, c2));
+
+    CartItem ci1 = new CartItem(c1, p1, 2, p1.getPrice());
+    CartItem ci2 = new CartItem(c1, p2, 2, p2.getPrice());
+    CartItem ci3 = new CartItem(c1, p3, 2, p3.getPrice());
+    CartItem ci4 = new CartItem(c1, p4, 2, p4.getPrice());
+    CartItem ci5 = new CartItem(c1, p5, 2, p5.getPrice());
+    CartItem ci6 = new CartItem(c2, p1, 2, p1.getPrice());
+    CartItem ci7 = new CartItem(c2, p2, 2, p2.getPrice());
+    CartItem ci8 = new CartItem(c2, p3, 2, p3.getPrice());
+    CartItem ci9 = new CartItem(c2, p4, 2, p4.getPrice());
+
+    cartItemRepository.saveAll(Arrays.asList(ci1, ci2, ci3, ci4, ci5, ci6, ci7, ci8, ci9));
   }
 }
