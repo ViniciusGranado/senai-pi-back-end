@@ -13,4 +13,8 @@ public class CartItemService {
   public CartItem insert(CartItem obj) {
     return repository.save(obj);
   }
+
+  public void delete(CartItem obj) {
+    repository.delete(obj);
+  }
 }
