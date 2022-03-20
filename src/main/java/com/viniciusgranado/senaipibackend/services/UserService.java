@@ -2,7 +2,6 @@ package com.viniciusgranado.senaipibackend.services;
 
 import com.viniciusgranado.senaipibackend.entities.User;
 import com.viniciusgranado.senaipibackend.entities.dtos.UserInfo;
-import com.viniciusgranado.senaipibackend.entities.enums.Roles;
 import com.viniciusgranado.senaipibackend.repositories.UserRepository;
 import com.viniciusgranado.senaipibackend.services.exceptions.InvalidPasswordException;
 import com.viniciusgranado.senaipibackend.services.exceptions.ResourceNotFoundException;

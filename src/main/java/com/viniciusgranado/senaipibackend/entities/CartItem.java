@@ -1,5 +1,6 @@
 package com.viniciusgranado.senaipibackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.viniciusgranado.senaipibackend.entities.pk.CartItemPk;
 
 import javax.persistence.EmbeddedId;
@@ -13,19 +14,18 @@ import java.util.Objects;
 public class CartItem implements Serializable {
   @EmbeddedId
   private CartItemPk id = new CartItemPk();
-  private Integer quatity;
   private Double price;
 
   public CartItem() {
   }
 
-  public CartItem(Cart cart, Product product, Integer quatity, Double price) {
+  public CartItem(Cart cart, Product product, Double price) {
     id.setCart(cart);
     id.setProduct(product);
-    this.quatity = quatity;
     this.price = price;
   }
 
+  @JsonIgnore
   public Cart getCart() {
     return id.getCart();
   }
@@ -42,24 +42,12 @@ public class CartItem implements Serializable {
     id.setProduct(product);
   }
 
-  public Integer getQuatity() {
-    return quatity;
-  }
-
-  public void setQuatity(Integer quatity) {
-    this.quatity = quatity;
-  }
-
   public Double getPrice() {
     return price;
   }
 
   public void setPrice(Double price) {
     this.price = price;
-  }
-
-  public Double getSubTotal() {
-    return price * quatity;
   }
 
   @Override

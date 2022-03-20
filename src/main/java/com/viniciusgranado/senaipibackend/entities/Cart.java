@@ -1,5 +1,7 @@
 package com.viniciusgranado.senaipibackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
@@ -14,6 +16,7 @@ public class Cart implements Serializable {
   private Long id;
 
   @OneToOne
+  @JsonIgnore
   @JoinColumn(name = "client_id")
   private User client;
 
@@ -46,16 +49,6 @@ public class Cart implements Serializable {
 
   public Set<CartItem> getItems() {
     return items;
-  }
-
-  public Double getTotal() {
-    double total = 0d;
-
-    for(CartItem item : items) {
-      total += item.getSubTotal();
-    }
-
-    return total;
   }
 
   @Override

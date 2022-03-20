@@ -1,5 +1,6 @@
 package com.viniciusgranado.senaipibackend.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.viniciusgranado.senaipibackend.entities.enums.Roles;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class User implements Serializable {
   private Roles role;
 
   @OneToOne(mappedBy = "client")
+  @JsonIgnore
   private Cart cart;
 
   public User() {
@@ -81,6 +83,10 @@ public class User implements Serializable {
 
   public void setRole(Roles role) {
     this.role = role;
+  }
+
+  public Cart getCart() {
+    return cart;
   }
 
   @Override
