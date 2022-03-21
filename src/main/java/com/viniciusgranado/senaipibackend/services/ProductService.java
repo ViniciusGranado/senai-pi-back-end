@@ -40,4 +40,8 @@ public class ProductService {
   public List<Product> findAllByIsFavorite() {
     return productRepository.findAllByIsFavorite(true);
   }
+
+  public Product insert(Product obj) {
+    return productRepository.save(obj);
+  }
 }

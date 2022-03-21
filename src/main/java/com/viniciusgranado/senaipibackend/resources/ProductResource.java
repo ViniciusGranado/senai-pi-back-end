@@ -2,13 +2,13 @@ package com.viniciusgranado.senaipibackend.resources;
 
 import com.viniciusgranado.senaipibackend.entities.Category;
 import com.viniciusgranado.senaipibackend.entities.Product;
+import com.viniciusgranado.senaipibackend.entities.dtos.NewProductDto;
 import com.viniciusgranado.senaipibackend.services.CategoryService;
 import com.viniciusgranado.senaipibackend.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -51,5 +51,25 @@ public class ProductResource {
     List<Product> list = productService.findAllByIsFavorite();
 
     return ResponseEntity.ok().body(list);
+  }
+
+  @PostMapping
+  public ResponseEntity<Product> insert(@RequestBody NewProductDto newProduct) {
+    Product product = new Product(
+            null,
+            newProduct.getName(),
+            newProduct.getDescription(),
+            newProduct.getPrice(),
+            newProduct.getImgUrl(),
+            newProduct.isFavorite()
+    );
+
+    for (Category category : newProduct.getCategories()) {
+      product.getCategories().add(category);
+    }
+
+    productService.insert(product);
+
+    return ResponseEntity.ok().body(product);
   }
 }
