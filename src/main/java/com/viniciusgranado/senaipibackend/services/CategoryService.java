@@ -38,4 +38,8 @@ public class CategoryService {
       throw new ResourceNotFoundException(reference);
     }
   }
+
+  public Category insert (Category category) {
+    return repository.save(category);
+  }
 }
