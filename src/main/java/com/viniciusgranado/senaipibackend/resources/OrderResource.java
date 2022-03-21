@@ -1,15 +1,9 @@
 package com.viniciusgranado.senaipibackend.resources;
 
-import com.viniciusgranado.senaipibackend.entities.Order;
-import com.viniciusgranado.senaipibackend.entities.OrderItem;
-import com.viniciusgranado.senaipibackend.entities.Product;
-import com.viniciusgranado.senaipibackend.entities.User;
+import com.viniciusgranado.senaipibackend.entities.*;
 import com.viniciusgranado.senaipibackend.entities.dtos.OrderItemsInfo;
 import com.viniciusgranado.senaipibackend.entities.dtos.ProductInfo;
-import com.viniciusgranado.senaipibackend.services.OrderItemService;
-import com.viniciusgranado.senaipibackend.services.OrderService;
-import com.viniciusgranado.senaipibackend.services.ProductService;
-import com.viniciusgranado.senaipibackend.services.UserService;
+import com.viniciusgranado.senaipibackend.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,6 +28,12 @@ public class OrderResource {
   @Autowired
   ProductService productService;
 
+  @Autowired
+  CartItemService cartItemService;
+
+  @Autowired
+  CartService cartService;
+
   @GetMapping(value = "/{id}")
   public ResponseEntity<Order> findById(@PathVariable Long id) {
     Order obj = orderService.findById(id);
@@ -45,6 +45,7 @@ public class OrderResource {
   public ResponseEntity<Order> insert(@RequestBody OrderItemsInfo orderInfo) {
     // TODO return updated object
     User user = userService.findById(orderInfo.getClientId());
+    Cart cart = cartService.findByClientId(orderInfo.getClientId());
 
     Order order = orderService.insert(new Order(null, user));
 
@@ -55,6 +56,8 @@ public class OrderResource {
       product = productService.findById(item.getProductId());
 
       obj.add(new OrderItem(order, product, item.getQuantity(), product.getPrice()));
+
+      cartItemService.delete(new CartItem(cart, product));
     }
 
     orderItemService.insertAll(obj);

@@ -64,5 +64,10 @@ public class TestConfig implements CommandLineRunner {
     User u2 = new User(null, "Alex Green", "alex@gmail.com", "agreen", "123456",  Roles.valueOf("ADMIN"));
 
     userRepository.saveAll(Arrays.asList(u1, u2));
+
+    Cart c1 = new Cart(null, u1);
+    Cart c2 = new Cart(null, u2);
+
+    cartRepository.saveAll(Arrays.asList(c1, c2));
   }
 }

@@ -49,7 +49,6 @@ public class CartItemResource {
 
     cartItemService.delete(obj);
 
-//    return ResponseEntity.noContent().build();
     return ResponseEntity.ok().body(obj);
   }
 }
