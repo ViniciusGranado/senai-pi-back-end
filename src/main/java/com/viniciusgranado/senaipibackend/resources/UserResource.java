@@ -1,8 +1,10 @@
 package com.viniciusgranado.senaipibackend.resources;
 
+import com.viniciusgranado.senaipibackend.entities.Cart;
 import com.viniciusgranado.senaipibackend.entities.User;
 import com.viniciusgranado.senaipibackend.entities.dtos.LoginForm;
 import com.viniciusgranado.senaipibackend.entities.dtos.UserInfo;
+import com.viniciusgranado.senaipibackend.services.CartService;
 import com.viniciusgranado.senaipibackend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,25 +18,30 @@ import java.util.List;
 @RequestMapping(value = "/users")
 public class UserResource {
   @Autowired
-  private UserService service;
+  private UserService userService;
+
+  @Autowired
+  private CartService cartService;
 
   @GetMapping
   public ResponseEntity<List<User>> findAll() {
-    List<User> list = service.findAll();
+    List<User> list = userService.findAll();
 
     return ResponseEntity.ok().body(list);
   }
 
   @GetMapping(value = "/{id}")
   public ResponseEntity<User> findById(@PathVariable Long id) {
-    User obj = service.findById(id);
+    User obj = userService.findById(id);
 
     return ResponseEntity.ok().body(obj);
   }
 
   @PostMapping
   public ResponseEntity<User> insert(@RequestBody User newUser) {
-    User obj = service.insert(newUser);
+    User obj = userService.insert(newUser);
+
+    cartService.insert(new Cart(null, obj));
 
     URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 
@@ -43,14 +50,14 @@ public class UserResource {
 
   @GetMapping(value = "/username/{username}")
   public ResponseEntity<User> findByUsername(@PathVariable String username) {
-    User obj = service.findByUsername(username);
+    User obj = userService.findByUsername(username);
 
     return ResponseEntity.ok().body(obj);
   }
 
   @PostMapping(value = "/login")
   public ResponseEntity<UserInfo> findIfUserPasswordIsCorrect(@RequestBody LoginForm loginForm) {
-    UserInfo obj = service.findIfUserPasswordIsCorrect(loginForm.getUsername(), loginForm.getPassword());
+    UserInfo obj = userService.findIfUserPasswordIsCorrect(loginForm.getUsername(), loginForm.getPassword());
 
     return ResponseEntity.ok().body(obj);
   }

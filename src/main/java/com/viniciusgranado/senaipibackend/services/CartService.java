@@ -18,4 +18,8 @@ public class CartService {
 
     return obj.orElseThrow(() -> new ResourceNotFoundException(id));
   }
+
+  public Cart insert(Cart cart) {
+    return repository.save(cart);
+  }
 }
