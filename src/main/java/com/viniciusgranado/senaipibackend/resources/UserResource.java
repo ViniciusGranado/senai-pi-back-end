@@ -4,6 +4,7 @@ import com.viniciusgranado.senaipibackend.entities.Cart;
 import com.viniciusgranado.senaipibackend.entities.User;
 import com.viniciusgranado.senaipibackend.entities.dtos.LoginForm;
 import com.viniciusgranado.senaipibackend.entities.dtos.UserInfo;
+import com.viniciusgranado.senaipibackend.entities.enums.Roles;
 import com.viniciusgranado.senaipibackend.services.CartService;
 import com.viniciusgranado.senaipibackend.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class UserResource {
 
   @PostMapping
   public ResponseEntity<User> insert(@RequestBody User newUser) {
-    User obj = userService.insert(newUser);
+    User obj = userService.insert(new User(null, newUser.getName(), newUser.getEmail(), newUser.getUsername(), newUser.getPassword(), Roles.COMMON));
 
     cartService.insert(new Cart(null, obj));
 
